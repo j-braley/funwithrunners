@@ -22,7 +22,7 @@ jobs:
         run: |
           if [[ ${{ inputs.runner }} = 'ubuntu-latest' ]];
           then
-            echo "runner=Agent" >> $GITHUB_OUTPUT
+            echo "runner=${{ secrets.LINUXPOOL }}" >> $GITHUB_OUTPUT
           fi
           if [[ ${{ inputs.runner }} = 'windows' ]];
           then
@@ -38,7 +38,7 @@ jobs:
   
   run-allocated-runner:
     needs: allocate-runner
-    runs-on: [self-hosted, "${{ secrets.LINUXPOOL }}"]
+    runs-on: [self-hosted, "${{ needs.allocate-runner.outputs.chosenRunner }}"]
     steps:
       - name: Run a task
         run: | 
