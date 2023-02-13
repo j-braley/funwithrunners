@@ -34,7 +34,7 @@ jobs:
   
   run-allocated-runner:
     # needs: allocate-runner
-    runs-on: [self-hosted, "${{ inputs.runner }}"]
+    runs-on: [self-hosted, 1ES.Pool="${{ inputs.runner }}"]
     steps:
       - name: Run a task
         run: | 
