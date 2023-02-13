@@ -37,8 +37,8 @@ jobs:
       chosenRunner: ${{ steps.runner_allocation.outputs.runner }}
   
   run-allocated-runner:
-    needs: runner_allocation
-    runs-on: ${{ needs.runner_allocation.outputs.chosenRunner }}
+    needs: allocate-runner
+    runs-on: ${{ needs.allocate-runner.outputs.chosenRunner }}
     steps:
       - name: Run a task
         run: | 
