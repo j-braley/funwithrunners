@@ -10,9 +10,8 @@ on:
         default: None
 
 jobs:
-  
   run-allocated-runner:
-    runs-on: [self-hosted, 1ES.Pool=${{ inputs.runner }}]
+    runs-on: [self-hosted, "1ES.Pool=${{ inputs.runner }}"]
     steps:
       - name: Run a task
         run: | 
