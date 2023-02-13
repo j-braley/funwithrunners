@@ -45,11 +45,11 @@ jobs:
           echo "Hello there!!!"
           echo $hostname
 
-  #  run-allocate-runner-deux:
-  #   needs: allocate-runner
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Run a task
-  #       run: | 
-  #         echo "Hello there!!!"
-  #         echo ${{ needs.allocate-runner.outputs.chosenRunner }}
+  run-allocate-runner-deux:
+    needs: allocate-runner
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run a task
+        run: | 
+          echo "Hello there!!!"
+          echo ${{ needs.allocate-runner.outputs.chosenRunner }}
