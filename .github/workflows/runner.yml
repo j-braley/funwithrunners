@@ -22,7 +22,7 @@ jobs:
         run: |
           if [[ ${{ inputs.runner }} = 'ubuntu-latest' ]];
           then
-            echo "runner=${{ inputs.runner }}" >> $GITHUB_OUTPUT
+            echo "runner=${{ secrets.LINUX_AGENT }}" >> $GITHUB_OUTPUT
           fi
           if [[ ${{ inputs.runner }} = 'windows' ]];
           then
