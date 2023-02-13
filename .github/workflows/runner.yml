@@ -20,9 +20,9 @@ jobs:
       - name: Allocate a runner
         id: runner_allocation
         run: |
-          if [[ ${{ inputs.runner }} = 'linux' ]];
+          if [[ ${{ inputs.runner }} = 'ubuntu-latest' ]];
           then
-            echo "runner=ubuntu-latest" >> $GITHUB_OUTPUT
+            echo "runner=${{ inputs.runner }}" >> $GITHUB_OUTPUT
           fi
           if [[ ${{ inputs.runner }} = 'windows' ]];
           then
