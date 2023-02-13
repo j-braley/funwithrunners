@@ -45,7 +45,7 @@ jobs:
           echo "Hello there!!!"
           echo $hostname
 
-   run-allocated-runner-deux:
+   run-allocate-runner-deux:
     needs: allocate-runner
     runs-on: ubuntu-latest
     steps:
