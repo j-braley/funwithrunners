@@ -22,7 +22,7 @@ jobs:
         run: |
           if [[ ${{ inputs.runner }} = 'linux' ]];
           then
-            echo "runner=${{ secrets.LINUX_AGENT }}" >> $GITHUB_OUTPUT
+            echo "runner=ubuntu-latest" >> $GITHUB_OUTPUT
           fi
           if [[ ${{ inputs.runner }} = 'windows' ]];
           then
@@ -44,3 +44,12 @@ jobs:
         run: | 
           echo "Hello there!!!"
           echo $hostname
+
+   run-allocated-runner-deux:
+    needs: allocate-runner
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run a task
+        run: | 
+          echo "Hello there!!!"
+          echo ${{ needs.allocate-runner.outputs.chosenRunner }}
