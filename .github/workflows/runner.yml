@@ -4,7 +4,7 @@ name: FunWithRunners
 on:
   workflow_dispatch:
     inputs:
-      runner:
+      pool:
         description: set your pool
         type: string
         default: None
