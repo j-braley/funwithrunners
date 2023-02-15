@@ -10,10 +10,32 @@ on:
         default: None
 
 jobs:
-  run-allocated-runner:
-    runs-on: [self-hosted, "1ES.Pool=${{ inputs.runner }}"]
+  configuration:
+    runs-on: ubuntu-latest
+    outputs:
+      configured-agent: ${{ steps.configure.outputs.agent }}
     steps:
-      - name: Run a task
-        run: | 
-          echo "Hello there!!!"
-          echo $hostname
+      - name: Configure runner
+        id: configure
+        run: |
+          if [[ ${{ inputs.pool }} == "self-hosted" ]]; then
+            echo "agent='["self-hosted", "Linux", "X64"]'" >> $GITHUB_OUTPUT
+          else
+            echo "agent='["ubuntu-latest"]'" >> $GITHUB_OUTPUT
+          fi
+  
+  run-allocated-runner:
+    runs-on: ${{ fromJSON(needs.configuration.outputs.configured-agent) }}
+    needs: [configuration]
+    steps:
+      - name: Azure login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDS }}
+        
+        - name: Azure CLI
+          uses: azure/CLI@v1
+          with:
+            azcliversion: 2.30.0
+            inlineScript: |
+              az keyvault secret show --name ${{ secrets.SECRET_NAME }} --vault-name ${{ secrets.VAULT_NAME }} --query value -o tsv
