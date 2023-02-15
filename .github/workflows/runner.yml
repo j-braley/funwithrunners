@@ -26,7 +26,7 @@ jobs:
   
   run-allocated-runner:
     runs-on: ${{ fromJSON(needs.configuration.outputs.configured-agent) }}
-    needs: [configuration]
+    needs: configuration
     steps:
       - name: Azure login
         uses: azure/login@v1
