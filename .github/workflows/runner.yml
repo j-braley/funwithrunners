@@ -26,16 +26,16 @@ jobs:
   
   run-allocated-runner:
     runs-on: ${{ fromJSON(needs.configuration.outputs.configured-agent) }}
-    needs: configuration
+    needs: [configuration]
     steps:
       - name: Azure login
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDS }}
         
-        - name: Azure CLI
-          uses: azure/CLI@v1
-          with:
-            azcliversion: 2.30.0
-            inlineScript: |
-              az keyvault secret show --name ${{ secrets.SECRET_NAME }} --vault-name ${{ secrets.VAULT_NAME }} --query value -o tsv
+      - name: Azure CLI
+        uses: azure/CLI@v1
+        with:
+          azcliversion: 2.30.0
+          inlineScript: |
+            az keyvault secret show --name ${{ secrets.SECRET_NAME }} --vault-name ${{ secrets.VAULT_NAME }} --query value -o tsv
