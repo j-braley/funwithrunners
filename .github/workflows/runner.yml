@@ -31,6 +31,12 @@ jobs:
       - name: run script
         run: | 
           echo hello
+  nonsense-job:
+    runs-on: nonsense
+    steps:
+      - name: run script
+        run: | 
+          echo "hey there"
       # - name: Azure login
       #   uses: azure/login@v1
       #   with:
