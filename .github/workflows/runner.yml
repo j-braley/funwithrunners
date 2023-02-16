@@ -10,12 +10,12 @@ on:
         default: None
 
 jobs:
-  configuration_windows:
+  configuration:
     runs-on: ubuntu-latest
     outputs:
       configured-agent: ${{ steps.configure.outputs.agent }}
     steps:
-      - name: Configure windows runner
+      - name: Configure runner
         id: configure
         run: |
           if [[ ${{ inputs.pool }} == "self-hosted" ]]; then
@@ -23,28 +23,9 @@ jobs:
           else
             echo 'agent="ubuntu-latest"' >> $GITHUB_OUTPUT
           fi
-
-      # - name: Configure macos runner
-      #   id: configure
-      #   run: |
-      #     if [[ ${{ inputs.pool }} == "self-hosted" ]]; then
-      #       echo "agent=['self-hosted', 'Linux', 'X64']" >> $GITHUB_OUTPUT
-      #     else
-      #       echo 'agent="ubuntu-latest"' >> $GITHUB_OUTPUT
-      #     fi
-
-      # - name: Configure linux runner
-      #   id: configure
-      #   run: |
-      #     if [[ ${{ inputs.pool }} == "self-hosted" ]]; then
-      #       echo "agent=['self-hosted', 'Linux', 'X64']" >> $GITHUB_OUTPUT
-      #     else
-      #       echo 'agent="ubuntu-latest"' >> $GITHUB_OUTPUT
-      #     fi
-  
   
   run-allocated-runner:
-    runs-on: ${{ fromJSON(needs.configuration.outputs.configured-agent) }}
+    runs-on: [self-hosted, Linux, X64] # ${{ fromJSON(needs.configuration.outputs.configured-agent) }}
     needs: [configuration]
     steps:
       - name: Azure login
