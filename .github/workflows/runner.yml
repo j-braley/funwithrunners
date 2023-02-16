@@ -19,9 +19,9 @@ jobs:
         id: configure
         run: |
           if [[ ${{ inputs.pool }} == "self-hosted" ]]; then
-            echo "agent='"[self-hosted, Linux, X64]"'" >> $GITHUB_OUTPUT
+            echo "agent=['self-hosted', 'Linux', 'X64']" >> $GITHUB_OUTPUT
           else
-            echo "agent='["ubuntu-latest"]'" >> $GITHUB_OUTPUT
+            echo "agent="ubuntu-latest"" >> $GITHUB_OUTPUT
           fi
   
   run-allocated-runner:
