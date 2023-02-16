@@ -25,7 +25,7 @@ jobs:
           fi
   
   run-allocated-runner:
-    runs-on: [self-hosted, Linux, X64] # ${{ fromJSON(needs.configuration.outputs.configured-agent) }}
+    runs-on: ${{ fromJSON(needs.configuration.outputs.configured-agent) }}
     needs: [configuration]
     steps:
       - name: Azure login
